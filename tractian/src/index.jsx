@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 
+import App from './App';
+import AssetsProvider from './context/AssetsProvider';
 import './index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <AssetsProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </AssetsProvider>,
   document.getElementById('root'),
 );
