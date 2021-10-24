@@ -4,6 +4,7 @@ import { Layout, Menu, Breadcrumb, Typography } from 'antd';
 import './App.css';
 import LogoTractian from './images/LogoTractian.svg';
 import Cards from './components/Cards';
+import SelectAssets from './components/SelectAssets';
 
 const { Title } = Typography;
 
@@ -29,6 +30,7 @@ export default function App() {
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
+          <SelectAssets />
           <section
             className="site-layout-background"
             style={ { padding: 24, minHeight: 380 } }
