@@ -1,21 +1,12 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
-import { Card, Col, Row, Skeleton } from 'antd';
+import { Card, Col, Row, Skeleton, Button } from 'antd';
 import { WarningTwoTone, StopTwoTone, ToolTwoTone } from '@ant-design/icons';
-
-import getAllAssets from '../services/requestAPI';
+import AssetsContext from '../context/AssetsContext';
 
 export default function Cards() {
-  const [allAssets, setAllAssets] = useState(null);
-
-  useEffect(() => {
-    const getAll = () => {
-      getAllAssets().then((res) => setAllAssets(res));
-    };
-
-    getAll();
-  }, []);
+  const { allAssets } = useContext(AssetsContext);
 
   return (
     <div className="site-card-wrapper">
@@ -35,6 +26,14 @@ export default function Cards() {
                 .map((status) => (
                   <div key={ status.id }>{status.name}</div>
                 )) : null}
+            <Button
+              disabled={ !allAssets }
+              type="primary"
+              block
+              style={ { marginTop: 15 } }
+            >
+              Ver todos
+            </Button>
           </Card>
         </Col>
         <Col span={ 8 }>
@@ -50,6 +49,15 @@ export default function Cards() {
                 .map((status) => (
                   <div key={ status.id }>{status.name}</div>
                 )) : null}
+            <Button
+              disabled={ !allAssets }
+              type="primary"
+              block
+              style={ { marginTop: 15 } }
+            >
+              Ver todos
+
+            </Button>
           </Card>
         </Col>
         <Col span={ 8 }>
@@ -66,6 +74,15 @@ export default function Cards() {
                 .map((status) => (
                   <div key={ status.id }>{status.name}</div>
                 )) : null}
+            <Button
+              disabled={ !allAssets }
+              type="primary"
+              block
+              style={ { marginTop: 15 } }
+            >
+              Ver todos
+            </Button>
+
           </Card>
         </Col>
       </Row>
