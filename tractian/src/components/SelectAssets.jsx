@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 
 import { Select } from 'antd';
 
@@ -6,24 +7,21 @@ import AssetsContext from '../context/AssetsContext';
 import { getAssetById } from '../services/requestAPI';
 
 export default function SelectAssets() {
-  const { allAssets, idAsset, setIdAsset } = useContext(AssetsContext);
+  const { allAssets, setIdAsset } = useContext(AssetsContext);
+
+  const history = useHistory();
 
   const { Option } = Select;
 
-  const assetById = (id) => {
-    getAssetById(id).then((res) => setAssetResult(res));
-  };
-
   function handleChange(e) {
-    setIdAsset(e);
-    assetById(e);
+    getAssetById(e).then((res) => setIdAsset(res));
+    history.push('/details');
   }
-  console.log(idAsset);
 
   return (
     <Select
       placeholder="Pesquise seu ativo"
-      style={ { width: 200, marginBottom: 20 } }
+      style={ { width: 200, margin: '20px 0 20px 0' } }
       disabled={ !allAssets }
       onChange={ (e) => handleChange(e) }
     >
@@ -34,7 +32,6 @@ export default function SelectAssets() {
           value={ asset.id }
         >
           {asset.name}
-
         </Option>
       )) : null}
     </Select>

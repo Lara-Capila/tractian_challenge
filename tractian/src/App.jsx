@@ -1,15 +1,12 @@
 import React from 'react';
 
 import './App.css';
-import Details from './pages/Details';
-
-import Home from './pages/Home';
+import Routes from './routes/routes';
 
 export default function App() {
   return (
     <section>
-      <Home />
-      <Details />
+      <Routes />
     </section>
   );
 }

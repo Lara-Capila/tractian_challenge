@@ -1,17 +1,27 @@
 import React, { useContext } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+
+import { Skeleton } from 'antd';
+
+import AssetDetails from '../components/details/AssetDetails';
 import AssetsContext from '../context/AssetsContext';
 
 export default function Details() {
-  const { assetResult } = useContext(AssetsContext);
+  const { idAsset } = useContext(AssetsContext);
 
-  useEffect(() => {
-    const result = () => assetResult;
+  const history = useHistory();
 
-    result();
-  }, [assetResult]);
-  console.log(assetResult);
+  function goBack() {
+    history.goBack();
+  }
+
   return (
-    <div>ol</div>
+    <section>
+      <Link to="/" onClick={ () => goBack }>Voltar</Link>
+      {idAsset
+        ? (
+          <AssetDetails />) : <Skeleton active />}
+    </section>
   );
 }
