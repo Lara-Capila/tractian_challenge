@@ -1,6 +1,5 @@
-const allAssets = 'https://my-json-server.typicode.com/tractian/fake-api/assets';
-
 export async function getAllAssets() {
+  const allAssets = 'https://my-json-server.typicode.com/tractian/fake-api/assets';
   const config = {
     method: 'GET',
   };
