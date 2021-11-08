@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import AssetsContext from './AssetsContext';
-import { getAllAssets } from '../services/requestAPI';
+import { getAllAssets } from '../services/assetsRequest';
 
 export default function AssetsProvider({ children }) {
   const THREE_SECUNDS = 3000;

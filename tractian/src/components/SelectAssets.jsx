@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { Select } from 'antd';
 
 import AssetsContext from '../context/AssetsContext';
-import { getAssetById } from '../services/requestAPI';
+import { getAssetById } from '../services/assetsRequest';
 
 export default function SelectAssets() {
   const { allAssets, setIdAsset } = useContext(AssetsContext);
