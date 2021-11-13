@@ -3,14 +3,14 @@ import React, { useContext } from 'react';
 
 import { Card, Col, Row, Skeleton } from 'antd';
 import { WarningTwoTone, StopTwoTone, ToolTwoTone } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import AssetsContext from '../context/AssetsContext';
 
 export default function Cards() {
   const { allAssets } = useContext(AssetsContext);
 
-  function handleClick(e) {
-    console.log('event handle click', e);
+  function handleClick(id) {
+    console.log('event handle click', id);
   }
 
   return (
@@ -34,13 +34,14 @@ export default function Cards() {
                     name={ asset.name }
                     value={ asset.id }
                   >
-                    <div>{asset.name}</div>
-                    <Link
-                      to="/details"
-                      onClick={ (e) => handleClick(e) }
+                    <button
+                      style={ { border: 'none', margin: 8 } }
+                      type="button"
+                      onClick={ () => handleClick(asset.id) }
                     >
-                      Saiba mais
-                    </Link>
+                      {asset.name}
+
+                    </button>
                   </section>
                 )) : null}
           </Card>

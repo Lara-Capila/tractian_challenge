@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Card } from 'antd';
 import {
@@ -12,9 +12,15 @@ import {
 
 import AssetsContext from '../../context/AssetsContext';
 import AssetReability from './AssetRealiability';
+import { getUnit } from '../../services/request';
 
 export default function AssetDetails() {
   const { idAsset } = useContext(AssetsContext);
+  const [unit, setUnit] = useState(null);
+
+  const unitName = (id) => {
+    getUnit(id).then((res) => setUnit(res));
+  };
 
   const capitalize = (str) => {
     if (typeof str !== 'string') {
@@ -23,6 +29,7 @@ export default function AssetDetails() {
     return str.charAt(0).toUpperCase() + str.substr(1);
   };
 
+  console.log(unit);
   return (
     <div style={ { display: 'flex', justifyContent: 'center' } }>
       <Card
@@ -60,6 +67,7 @@ export default function AssetDetails() {
                 style={ { fontSize: 18, paddingRight: 5, color: 'grey' } }
               />
               <strong>Empresa:</strong>
+              {() => { unitName(idAsset.unitId); }}
             </p>
             <p>
               <PushpinOutlined
