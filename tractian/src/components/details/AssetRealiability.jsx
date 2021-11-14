@@ -19,14 +19,14 @@ export default function AssetReability() {
   const [activeTabKey1, setActiveTabKey1] = useState('tab1');
 
   let statusName;
-  switch (true) {
-  case (idAsset.status === 'inAlert'):
+  switch (idAsset.status) {
+  case ('inAlert'):
     statusName = 'Em alerta';
     break;
-  case (idAsset.status === 'inOperation'):
+  case ('inOperation'):
     statusName = 'Em operação';
     break;
-  case (idAsset.status === 'inDowntime'):
+  case ('inDowntime'):
     statusName = 'Em parada';
     break;
   default:

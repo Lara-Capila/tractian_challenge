@@ -1,83 +1,109 @@
 /* eslint-disable no-nested-ternary */
 import React, { useContext } from 'react';
 
-import { Card, Col, Row, Skeleton } from 'antd';
-import { WarningTwoTone, StopTwoTone, ToolTwoTone } from '@ant-design/icons';
+import { Card, Skeleton } from 'antd';
+import {
+  WarningTwoTone,
+  StopTwoTone,
+  ToolTwoTone,
+  HeartTwoTone,
+} from '@ant-design/icons';
 // import { Link } from 'react-router-dom';
 import AssetsContext from '../context/AssetsContext';
 
 export default function Cards() {
   const { allAssets } = useContext(AssetsContext);
 
+  const cardInfo = [
+    {
+      id: 1,
+      title: 'Em Alerta',
+      status: 'inAlert',
+      icon: WarningTwoTone,
+      color: '#FF0000',
+      iconHealthScore: HeartTwoTone,
+    },
+    {
+      id: 2,
+      title: 'Em Parada',
+      status: 'inDowntime',
+      icon: StopTwoTone,
+      color: '#DAA520',
+    },
+    {
+      id: 3,
+      title: 'Em Operação',
+      status: 'inOperation',
+      icon: ToolTwoTone,
+      color: '#008000',
+    },
+  ];
+
   function handleClick(id) {
     console.log('event handle click', id);
   }
 
-  return (
-    <div className="site-card-wrapper">
-      <Row gutter={ 16 }>
-        <Col span={ 8 }>
-          <Card
-            title="Em Alerta"
-            extra={
-              <WarningTwoTone twoToneColor="#FF0000" style={ { fontSize: 20 } } />
-            }
-            bordered
-            style={ { width: 300 } }
-          >
-            {!allAssets
-              ? <Skeleton active />
-              : allAssets ? allAssets.filter(((asset) => asset.status === 'inAlert'))
-                .map((asset) => (
-                  <section
-                    key={ asset.id }
-                    name={ asset.name }
-                    value={ asset.id }
-                  >
-                    <button
-                      style={ { border: 'none', margin: 8 } }
-                      type="button"
-                      onClick={ () => handleClick(asset.id) }
-                    >
-                      {asset.name}
+  const getAssetsByStatus = (assets, status) => assets
+    .filter((el) => el.status === status);
 
-                    </button>
-                  </section>
-                )) : null}
-          </Card>
-        </Col>
-        <Col span={ 8 }>
+  return (
+    <div
+      className="site-card-wrapper"
+      style={ { display: 'flex', justifyContent: 'space-evenly' } }
+    >
+      {allAssets ? cardInfo.map((item) => (
+        <section key={ item.id }>
           <Card
-            title="Em Parada"
-            bordered
-            extra={ <StopTwoTone twoToneColor="#DAA520" style={ { fontSize: 20 } } /> }
+            title={ item.title }
+            bordered={ false }
+            extra={
+              <item.icon twoToneColor={ item.color } style={ { fontSize: 20 } } />
+            }
             style={ { width: 300 } }
+
           >
-            {!allAssets
-              ? <Skeleton active />
-              : allAssets ? allAssets.filter(((status) => status.status === 'inDowntime'))
-                .map((asset) => (
-                  <div key={ asset.id }>{asset.name}</div>
-                )) : null}
+            {getAssetsByStatus(allAssets, item.status)
+              .map((el) => (
+                <div
+                  onClick={ () => handleClick(el.id) }
+                  onKeyPress={ () => handleClick(el.id) }
+                  role="button"
+                  tabIndex={ 0 }
+                  key={ el.id }
+                  style={
+                    {
+                      border: '1px solid #DCDCDC',
+                      borderRadius: 8,
+                      padding: 8,
+                      marginBottom: 10,
+                      textAlign: 'center' }
+                  }
+                >
+                  <h3>{el.name}</h3>
+                  <div
+                    style={
+                      {
+                        display: 'flex',
+                        justifyContent: 'center',
+                        paddingTop: 10,
+                        paddingRight: 8 }
+                    }
+                  >
+                    <HeartTwoTone
+                      style={ { fontSize: 20 } }
+                      twoToneColor="red"
+                    />
+                    <span style={ { padding: '0 8px' } }>Saúde:</span>
+                    <span>
+                      {el.healthscore}
+                      %
+                    </span>
+                  </div>
+                </div>
+              ))}
           </Card>
-        </Col>
-        <Col span={ 8 }>
-          <Card
-            title="Em Operação"
-            bordered
-            extra={ <ToolTwoTone twoToneColor="#008000" style={ { fontSize: 20 } } /> }
-            style={ { width: 300 } }
-          >
-            {!allAssets
-              ? <Skeleton active />
-              : allAssets ? allAssets
-                .filter(((status) => status.status === 'inOperation'))
-                .map((asset) => (
-                  <div key={ asset.id }>{asset.name}</div>
-                )) : null}
-          </Card>
-        </Col>
-      </Row>
+        </section>
+      )) : <Skeleton active />}
     </div>
   );
 }
