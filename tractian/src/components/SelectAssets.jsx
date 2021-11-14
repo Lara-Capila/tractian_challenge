@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router';
 
 import { Select } from 'antd';
 
+import { useHistory } from 'react-router';
 import AssetsContext from '../context/AssetsContext';
 import { getAssetById } from '../services/assetsRequest';
 

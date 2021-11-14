@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 
 import { Skeleton } from 'antd';
 
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import AssetDetails from '../components/details/AssetDetails';
 import AssetsContext from '../context/AssetsContext';
 
