@@ -8,11 +8,13 @@ import {
   ToolTwoTone,
   HeartTwoTone,
 } from '@ant-design/icons';
-// import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import AssetsContext from '../context/AssetsContext';
+import { getAssetById } from '../services/assetsRequest';
 
 export default function Cards() {
-  const { allAssets } = useContext(AssetsContext);
+  const { allAssets, setIdAsset } = useContext(AssetsContext);
+  const history = useHistory();
 
   const cardInfo = [
     {
@@ -39,8 +41,11 @@ export default function Cards() {
     },
   ];
 
+  const HEART_GREEN = 70;
+
   function handleClick(id) {
-    console.log('event handle click', id);
+    getAssetById(id).then((res) => setIdAsset(res));
+    history.push('/details');
   }
 
   const getAssetsByStatus = (assets, status) => assets
@@ -91,7 +96,9 @@ export default function Cards() {
                   >
                     <HeartTwoTone
                       style={ { fontSize: 20 } }
-                      twoToneColor="red"
+                      twoToneColor={
+                        el.healthscore >= HEART_GREEN ? '#2ebb2e' : '#FF0000'
+                      }
                     />
                     <span style={ { padding: '0 8px' } }>Saúde:</span>
                     <span>
