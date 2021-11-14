@@ -2,7 +2,6 @@ import React from 'react';
 import { Typography } from 'antd';
 
 import Cards from '../components/Cards';
-// import FooterPage from '../components/Footer';
 
 const { Title } = Typography;
 
