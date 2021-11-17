@@ -27,7 +27,7 @@ export default function Default() {
             <SelectAssets />
           </Menu>
         </Header>
-        <Content className="site-layout" style={ { padding: '50px', marginTop: 64 } }>
+        <Content className="site-layout" style={ { padding: '30px', marginTop: 64 } }>
           {location.pathname === '/' ? <Home /> : <Details />}
         </Content>
       </Layout>
