@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -23,9 +23,11 @@ export default function Default() {
               <img className="logo" src={ LogoTractian } alt="Logo Tractian" />
             </Link>
           </div>
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={ ['2'] }>
+            <Menu.Item key="1"><SelectAssets /></Menu.Item>
+          </Menu>
         </Header>
-        <Content className="site-layout" style={ { padding: '0 50px', marginTop: 64 } }>
-          <SelectAssets />
+        <Content className="site-layout" style={ { padding: '50px', marginTop: 64 } }>
           {location.pathname === '/' ? <Home /> : <Details />}
         </Content>
       </Layout>
