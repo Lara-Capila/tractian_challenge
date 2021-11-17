@@ -4,7 +4,7 @@ import { Skeleton } from 'antd';
 
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import AssetDetails from '../components/details/AssetDetails';
+import AssetDetails from '../components/details/AssetDetails copy';
 import AssetsContext from '../context/AssetsContext';
 
 export default function Details() {
