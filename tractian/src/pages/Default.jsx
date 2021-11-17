@@ -24,7 +24,7 @@ export default function Default() {
             </Link>
           </div>
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={ ['2'] }>
-            <Menu.Item key="1"><SelectAssets /></Menu.Item>
+            <SelectAssets />
           </Menu>
         </Header>
         <Content className="site-layout" style={ { padding: '50px', marginTop: 64 } }>
