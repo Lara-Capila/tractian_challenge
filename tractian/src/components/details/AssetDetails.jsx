@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { Card } from 'antd';
+import { Card, Image } from 'antd';
 
 import AssetsContext from '../../context/AssetsContext';
 import AssetReability from './AssetRealiability';
@@ -16,13 +16,14 @@ export default function AssetDetails() {
         style={ { width: '100%' } }
       >
         <div
-          style={ { display: 'flex', justifyContent: 'center', marginBottom: 20 } }
+          style={ { textAlign: 'center' } }
         >
-          <img
+          <Image
             src={ idAsset.image }
             alt={ idAsset.name }
             style={ { width: 200 } }
           />
+          <p>Clique na imagem para ampliar</p>
         </div>
         <TableDetails />
       </Card>
