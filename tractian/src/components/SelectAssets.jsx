@@ -22,6 +22,7 @@ export default function SelectAssets() {
   return (
     <section>
       <Select
+        size="middle"
         placeholder="Pesquise seu ativo"
         style={ { width: '100%' } }
         disabled={ !allAssets }
