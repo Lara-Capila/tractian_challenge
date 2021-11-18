@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { Input, Modal, notification, Space, Table } from 'antd';
+import { Input, Modal, notification, Space, Table, Select } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import AssetsContext from '../../context/AssetsContext';
+// import MultipleSelection from './MultipleSelection';
 
 export default function TableDetails() {
   const { idAsset } = useContext(AssetsContext);
@@ -74,6 +75,8 @@ export default function TableDetails() {
     },
   ];
 
+  const { Option } = Select;
+
   // a ação de editar foi contruída com a ajuda deste vídeo https://www.youtube.com/watch?v=y4_nSE-aZhc&ab_channel=CodeWithAamir
   return (
     <section>
@@ -121,13 +124,7 @@ export default function TableDetails() {
             setEditingAsset((prev) => ({ ...prev, unidade: e.target.value }));
           } }
         />
-        <Input
-          addonBefore="Responsável"
-          value={ editingAsset?.responsavel }
-          onChange={ (e) => {
-            setEditingAsset((prev) => ({ ...prev, responsavel: e.target.value }));
-          } }
-        />
+
         <Input
           addonBefore="Última Atualização"
           value={ editingAsset?.atualizacao }
@@ -135,6 +132,23 @@ export default function TableDetails() {
             setEditingAsset((prev) => ({ ...prev, atualizacao: e.target.value }));
           } }
         />
+        {console.log('responsavel', editingAsset?.responsavel)}
+        <Select
+          style={ { width: 500 } }
+          mode="multiple"
+          labelInValue
+          tokenSeparators={ [' ', ','] }
+          defaultValue={ ['lara'] }
+          // value={ editingAsset?.responsavel }
+          onChange={ (e) => {
+            console.log('evento', e.target);
+            setEditingAsset((prev) => ({ ...prev, atualizacao: e.target.value }));
+          } }
+        >
+          {idAsset.Allusers.map((user) => (
+            <Option key={ user.id }>{user.name}</Option>
+          ))}
+        </Select>
       </Modal>
 
     </section>

@@ -41,8 +41,19 @@ export async function getUserByUnitAndCompany(unit, company) {
   const users = await response.json();
   const filterUser = users
     .filter((user) => user.unitId === unit && user.companyId === company)
-    .map((user) => `${user.name} | `);
+    .map((user) => `${user.name}, `);
   return filterUser;
+}
+
+export async function getAllUsers() {
+  const allUsers = 'https://my-json-server.typicode.com/tractian/fake-api/users';
+  const config = {
+    method: 'GET',
+  };
+
+  const response = await fetch(allUsers, config);
+  const users = await response.json();
+  return users;
 }
 
 export async function getAssetById(id) {
@@ -62,6 +73,9 @@ export async function getAssetById(id) {
 
   const updateAssetUsers = await getUserByUnitAndCompany(asset.unitId, asset.companyId);
   asset.users = updateAssetUsers;
+
+  const updateAssetAllUsers = await getAllUsers();
+  asset.Allusers = updateAssetAllUsers;
 
   return asset;
 }
