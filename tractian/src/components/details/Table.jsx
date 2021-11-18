@@ -7,14 +7,15 @@ export default function TableDetails() {
   const { idAsset } = useContext(AssetsContext);
   const [isEditing, setIsEditing] = useState(false);
   const [editingAsset, setEditingAsset] = useState(null);
+
   const [dataSource, setDataSource] = useState([
     {
       id: idAsset.id,
       modelo: idAsset.model,
       sensor: idAsset.sensors,
-      empresa: 'jnfjnjfn',
-      unidade: 'jbfjhbhjfb',
-      responsavel: 'jfbhjbfh',
+      empresa: idAsset.company.name,
+      unidade: idAsset.unit.name,
+      responsavel: idAsset.users,
       atualizacao: idAsset.metrics.lastUptimeAt,
     },
   ]);
