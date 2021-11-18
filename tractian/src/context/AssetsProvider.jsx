@@ -17,6 +17,7 @@ export default function AssetsProvider({ children }) {
     interval();
   }, []);
 
+  console.log(allAssets);
   const context = {
     allAssets,
     setAllAssets,
