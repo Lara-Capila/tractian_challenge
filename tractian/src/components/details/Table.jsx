@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { Input, Modal, notification, Space, Table, Select } from 'antd';
+import { Input, Modal, notification, Space, Table, Select, Typography } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import AssetsContext from '../../context/AssetsContext';
-// import MultipleSelection from './MultipleSelection';
 
 export default function TableDetails() {
   const { idAsset } = useContext(AssetsContext);
@@ -21,16 +20,27 @@ export default function TableDetails() {
     },
   ]);
 
+  const { Title } = Typography;
+
   const onEditAsset = (record) => {
     setIsEditing(true);
     setEditingAsset({ ...record });
   };
 
   const openNotificationWithIcon = (type) => {
-    notification[type]({
+    const messageSucces = {
       message: 'Sucesso',
       description: 'Dados alterados com sucesso!',
-    });
+    };
+
+    const messageWarning = {
+      message: 'Atenção!',
+      description: 'Operação cancelada!',
+    };
+
+    notification[type](
+      type === 'success' ? messageSucces : messageWarning,
+    );
   };
 
   const columns = [
@@ -91,6 +101,7 @@ export default function TableDetails() {
         okText="Save"
         onCancel={ () => {
           setIsEditing(false);
+          openNotificationWithIcon('warning');
         } }
         onOk={ () => {
           setDataSource(((prev) => prev.map((asset) => {
@@ -100,8 +111,8 @@ export default function TableDetails() {
             return asset;
           })));
           setIsEditing(false);
+          openNotificationWithIcon('success');
         } }
-        afterClose={ () => openNotificationWithIcon('success') }
       >
         <Input
           addonBefore="Sensor"
@@ -110,6 +121,7 @@ export default function TableDetails() {
             setEditingAsset((prev) => ({ ...prev, sensor: e.target.value }));
           } }
         />
+
         <Input
           addonBefore="Empresa"
           value={ editingAsset?.empresa }
@@ -117,6 +129,7 @@ export default function TableDetails() {
             setEditingAsset((prev) => ({ ...prev, empresa: e.target.value }));
           } }
         />
+
         <Input
           addonBefore="Unidade"
           value={ editingAsset?.unidade }
@@ -132,23 +145,24 @@ export default function TableDetails() {
             setEditingAsset((prev) => ({ ...prev, atualizacao: e.target.value }));
           } }
         />
-        {console.log('responsavel', editingAsset?.responsavel)}
-        <Select
-          style={ { width: 500 } }
-          mode="multiple"
-          labelInValue
-          tokenSeparators={ [' ', ','] }
-          defaultValue={ ['lara'] }
-          // value={ editingAsset?.responsavel }
-          onChange={ (e) => {
-            console.log('evento', e.target);
-            setEditingAsset((prev) => ({ ...prev, atualizacao: e.target.value }));
-          } }
-        >
-          {idAsset.Allusers.map((user) => (
-            <Option key={ user.id }>{user.name}</Option>
-          ))}
-        </Select>
+        <section style={ { margin: '10px 0', border: '1px solid #d9d9d9', padding: 10 } }>
+          <Title level={ 5 }>Responsáveis</Title>
+          <Select
+            mode="multiple"
+            placeholder="Please select"
+            defaultValue={ editingAsset?.responsavel }
+            onChange={ (value) => {
+              setEditingAsset((prev) => ({ ...prev, responsavel: value }));
+            } }
+            style={ { width: '100%' } }
+          >
+            {idAsset.Allusers.map((user) => (
+              <Option key={ user.name }>{user.name}</Option>
+            ))}
+          </Select>
+
+        </section>
+
       </Modal>
 
     </section>
