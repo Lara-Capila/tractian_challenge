@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { Input, Modal, notification, Space, Table, Select, Typography } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import {
+  Input,
+  Modal, notification, Space, Table, Select, Typography, Popconfirm } from 'antd';
+import { EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import AssetsContext from '../../context/AssetsContext';
 
 export default function TableDetails() {
@@ -35,12 +37,21 @@ export default function TableDetails() {
 
     const messageWarning = {
       message: 'Atenção!',
-      description: 'Operação cancelada!',
+      description: 'Operação cancelada, os dados alterados não serão salvos!',
     };
 
     notification[type](
       type === 'success' ? messageSucces : messageWarning,
     );
+  };
+
+  const confirmCancellation = () => {
+    <Popconfirm
+      title="Are you sure？"
+      icon={ <QuestionCircleOutlined style={ { color: 'red' } } /> }
+    >
+      <p>Delete</p>
+    </Popconfirm>;
   };
 
   const columns = [
@@ -100,6 +111,7 @@ export default function TableDetails() {
         visible={ isEditing }
         okText="Save"
         onCancel={ () => {
+          confirmCancellation();
           setIsEditing(false);
           openNotificationWithIcon('warning');
         } }
