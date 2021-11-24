@@ -10,6 +10,26 @@ export default function TableDetails() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingAsset, setEditingAsset] = useState(null);
 
+  const formatDateAndHour = () => {
+    const date = new Date(idAsset.metrics.lastUptimeAt);
+    const options = {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    };
+
+    const optionsHours = {
+      hour: 'numeric',
+      minute: 'numeric',
+      timeZone: 'America/Sao_paulo',
+    };
+
+    const formattedDate = new Intl.DateTimeFormat('pt-BR', options).format(date);
+    const formattedHours = new Intl.DateTimeFormat('pt-BR', optionsHours).format(date);
+
+    return `${formattedDate} ás ${formattedHours}`;
+  };
+
   const [dataSource, setDataSource] = useState([
     {
       id: idAsset.id,
@@ -18,7 +38,7 @@ export default function TableDetails() {
       empresa: idAsset.company.name,
       unidade: idAsset.unit.name,
       responsavel: idAsset.users,
-      atualizacao: idAsset.metrics.lastUptimeAt,
+      atualizacao: formatDateAndHour(),
     },
   ]);
 
