@@ -1,4 +1,10 @@
 @import 'antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f0f2f5;
+}
 
 #components-layout-demo-fixed
 .logo {
