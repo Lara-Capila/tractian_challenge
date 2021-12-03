@@ -13,7 +13,7 @@ export default function AssetDetails() {
     <div style={ { display: 'flex', justifyContent: 'center' } }>
       <Card
         title={ idAsset.name }
-        style={ { width: '100%' } }
+        style={ { width: '50%' } }
       >
         <div
           style={ { textAlign: 'center' } }

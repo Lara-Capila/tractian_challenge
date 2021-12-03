@@ -106,7 +106,7 @@ export default function TableDetails() {
       key: 'atualizacao',
     },
     {
-      title: 'Action',
+      title: 'Editar',
       key: 'action',
       render: (record) => (
         <Space size="middle" style={ { display: 'flex', justifyContent: 'center' } }>
