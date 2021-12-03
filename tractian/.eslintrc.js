@@ -19,5 +19,6 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/jsx-max-depth': 0,
   },
 };
